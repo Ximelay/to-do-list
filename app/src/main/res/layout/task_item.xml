@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <!-- CheckBox для завершения задачи -->
+    <CheckBox
+        android:id="@+id/checkBoxComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
+    <!-- Текст заголовка задачи -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/checkBoxComplete"
+        android:layout_marginStart="8dp"
+        android:layout_toStartOf="@id/buttonEdit"
+        android:layout_centerVertical="true"
+        android:text="Заголовок задачи"
+        android:textSize="16sp" />
+
+    <!-- Кнопка "Редактировать" -->
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/buttonDelete"
+        android:layout_centerVertical="true"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="Редактировать"
+        android:textColor="@android:color/white"
+        android:padding="4dp"
+        android:textSize="12sp" />
+
+    <!-- Кнопка "Удалить" -->
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Удалить"
+        android:textColor="@android:color/white"
+        android:padding="4dp"
+        android:textSize="12sp" />
+</RelativeLayout>
