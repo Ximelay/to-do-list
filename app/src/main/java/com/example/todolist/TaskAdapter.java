@@ -43,33 +43,43 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         textViewTitle.setText(task.getTitle());
         checkBoxComplete.setChecked(task.isCompleted());
 
-        // Обработчик для CheckBox завершения задачи
-        checkBoxComplete.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                new AlertDialog.Builder(context)
-                        .setMessage("Вы точно хотите закрыть задачу?")
-                        .setPositiveButton("Да", (dialog, which) -> {
-                            tasks.remove(task);
+        // Обработчик для CheckBox
+        checkBoxComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Вы хотите удалить задачу?")
+                        .setPositiveButton("Да", (dialog, id) -> {
+                            tasks.remove(position);
                             notifyDataSetChanged();
                         })
-                        .setNegativeButton("Нет", (dialog, which) -> checkBoxComplete.setChecked(false))
+                        .setNegativeButton("Нет", (dialog, id) -> dialog.dismiss())
+                        .create()
                         .show();
             }
         });
 
-        // Обработчик для кнопки "Удалить"
-        buttonDelete.setOnClickListener(v -> {
-            tasks.remove(task);
-            notifyDataSetChanged();
+        // Обработчик для кнопки "Редактировать"
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditTask.class);
+                intent.putExtra("task_title", task.getTitle());
+                intent.putExtra("task_description", task.getDescription());
+                intent.putExtra("task_position", position);
+                ((MainActivity) context).startActivityForResult(intent, 2);
+            }
         });
 
-        // Обработчик для кнопки "Редактировать"
-        buttonEdit.setOnClickListener(v -> {
-            Intent editIntent = new Intent(context, EditTask.class);
-            editIntent.putExtra("task_title", task.getTitle());
-            editIntent.putExtra("task_description", task.getDescription());
-            editIntent.putExtra("task_position", position);
-            ((MainActivity) context).startActivityForResult(editIntent, 2);
+        // Обработчик для кнопки "Просмотрить задачу"
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewTask.class);
+                intent.putExtra("task_title", task.getTitle());
+                intent.putExtra("task_description", task.getDescription());
+                context.startActivity(intent);
+            }
         });
 
         return convertView;

@@ -21,36 +21,18 @@ public class ViewTask extends AppCompatActivity {
         textViewTaskDescription = findViewById(R.id.textViewTaskDescription);
         buttonEditTask = findViewById(R.id.buttonEditTask);
 
+        // Получение данных о задаче из Intent
         Intent intent = getIntent();
-        if (intent != null) {
-            String taskTitle = intent.getStringExtra("task_title");
-            String taskDescription = intent.getStringExtra("task_description");
+        textViewTaskTitle.setText(intent.getStringExtra("task_title"));
+        textViewTaskDescription.setText(intent.getStringExtra("task_description"));
 
-            textViewTaskTitle.setText(taskTitle);
-            textViewTaskDescription.setText(taskDescription);
-        }
-
+        // Кнопка "Назад"
+        buttonEditTask.setText("Назад");
         buttonEditTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent editIntent = new Intent(ViewTask.this, EditTask.class);
-                editIntent.putExtra("task_title", textViewTaskTitle.getText().toString());
-                editIntent.putExtra("task_description", textViewTaskDescription.getText().toString());
-                startActivityForResult(editIntent, 1);
+                finish(); // Возвращает на главный экран
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            String updatedTitle = data.getStringExtra("task_title");
-            String updatedDescription = data.getStringExtra("task_description");
-
-            textViewTaskTitle.setText(updatedTitle);
-            textViewTaskDescription.setText(updatedDescription);
-        }
     }
 }

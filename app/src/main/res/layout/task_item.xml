@@ -32,12 +32,12 @@
         android:layout_toStartOf="@id/buttonDelete"
         android:layout_centerVertical="true"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:text="Редактировать"
+        android:text="✎"
         android:textColor="@android:color/white"
         android:padding="4dp"
         android:textSize="12sp" />
 
-    <!-- Кнопка "Удалить" -->
+    <!-- Кнопка "Просмотрить задачу" -->
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Удалить"
+        android:text="👁"
         android:textColor="@android:color/white"
         android:padding="4dp"
         android:textSize="12sp" />
